@@ -1,0 +1,57 @@
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full bg-white p-8 rounded-lg">
+      <div>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Login to Your Account
+        </h2>
+      </div>
+      <form [formGroup]="submitForm"  class="mt-8 space-y-6" (ngSubmit)="submit()">
+        <div class="rounded-md shadow-sm space-y-3">
+          <div>
+            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+            <input
+              id="username"
+              name="form-username"
+              type="text"
+              required
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+              placeholder="Username"
+              formControlName="username"
+            />
+            <div class="text-red-500 text-sm mt-1" *ngIf="submitForm.get('username')?.hasError('required') && (submitForm.get('username')?.touched || submitForm.get('username')?.dirty)">
+              Username required
+            </div>
+            
+          </div>
+          <div>
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete
+              required
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+              placeholder="password"
+              formControlName="password"
+            />
+            <div class="text-red-500 text-sm mt-1" *ngIf="submitForm.get('username')?.hasError('required') && (submitForm.get('username')?.touched || submitForm.get('username')?.dirty)">
+              Password required
+            </div>
+          </div>
+        </div>
+  
+        <div>
+          <button
+            type="submit"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm 
+              font-medium rounded-md text-white bg-sky-500 hover:border-sky-500 hover:text-sky-500 hover:bg-transparent focus:outline-none 
+              focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 duration-200"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

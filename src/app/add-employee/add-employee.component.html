@@ -1,0 +1,68 @@
+<div class="h-screen w-full">
+    <div class="h-full flex justify-center items-center">
+        <div class="w-1/4"> 
+        <div>Add Employee</div>
+        <form class="mt-8 space-y-6" (ngSubmit)="submit()" [formGroup]="submitForm">
+            <!-- Birth date  -->
+            <div> 
+              <label for="birth_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birth Date</label>     
+              <div class="relative max-w-sm">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                    </svg>
+                  </div>
+                  <input formControlName="birth_date" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" placeholder="Select date">
+                </div>
+                <div class="text-red-500 text-sm mt-1" *ngIf="submitForm.get('birth_date')?.hasError('required') && (submitForm.get('birth_date')?.touched || submitForm.get('birth_date')?.dirty)">
+                  Required birth date
+                 </div>
+                  <div class="text-red-500 text-sm mt-1" *ngIf="isFuture">
+                   Time must be entered before today
+                  </div>
+            </div>
+            <!-- Birth date end -->
+
+            <!--  email -->
+            <div>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                <input formControlName="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" placeholder="Email" required>
+                <div class="text-red-500 text-sm mt-1" *ngIf="submitForm.get('email')?.hasError('required') && (submitForm.get('email')?.touched || submitForm.get('email')?.dirty)">
+                 Required email
+                </div>
+            </div>
+            <!--  email end -->
+
+            <!-- Salary -->
+            <div>
+                <label for="salary" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Salary</label>
+                <input formControlName="salary" type="text" id="salary" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" placeholder="Salary" required>
+                <div class="text-red-500 text-sm mt-1" *ngIf="submitForm.get('salary')?.hasError('required') && (submitForm.get('salary')?.touched || submitForm.get('salary')?.dirty)">
+                  Required salary
+                </div>
+                <div class="text-red-500 text-sm mt-1" *ngIf="submitForm.get('salary')?.hasError('pattern') && (submitForm.get('salary')?.touched || submitForm.get('salary')?.dirty)">
+                  Input salary should be numerical
+                </div>
+            </div>
+            <!-- salary end -->
+            
+            
+             <div>
+              <label for="group" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select group</label>
+                <select formControlName="group" id="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500">
+                  <option [ngValue]="''" disabled>Choose a group</option>
+                  <option name="group" *ngFor="let item of groupList" [ngValue]="item.id">{{item.name}}</option>
+                </select>
+                <div class="text-red-500 text-sm mt-1" *ngIf="submitForm.get('group')?.hasError('required') && (submitForm.get('group')?.touched || submitForm.get('group')?.dirty)">
+                  Required group
+                </div>
+             </div>
+            <div>
+              <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

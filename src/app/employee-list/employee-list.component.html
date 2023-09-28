@@ -1,0 +1,64 @@
+<div class="container mx-aut0 px-10 mt-[10rem]">
+  <h2 class="text-2xl font-semibold mb-5">Employee List</h2>
+  <form (ngSubmit)="search()" class="mb-3">
+    <input
+      type="text"
+      class="w-full border rounded px-3 py-2"
+      placeholder="Search by Name, Username, or Group"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="search()"
+      name="searchQuery"
+    />
+    <button type="submit" class="bg-blue-500 text-white px-2 py-1 rounded ml-2">Search</button>
+  </form>
+  <table class="max-w-3/4">
+    <thead>
+      <tr class="text-sm">
+        <th class="px-4 py-2">Employee ID</th>
+        <th class="px-4 py-2">Username</th>
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Email</th>
+        <th class="px-4 py-2">Birth Date</th>
+        <th class="px-4 py-2">Basic Salary</th>
+        <th class="px-4 py-2">Status</th>
+        <th class="px-4 py-2">Group</th>
+        <th class="px-4 py-2">Description</th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-sm" *ngFor="let employee of currentEmployees">
+        <td class="border px-4 py-2">{{ employee.id }}</td>
+        <td class="border px-4 py-2">
+          <button class="underline-offset-1 underline hover:text-sky-500 duration-200" (click)="toEmployeeDetail(employee.id)">
+            {{ employee.username }}  
+          </button>
+        </td>
+        <td class="border px-4 py-2">{{ employee.firstName }} {{ employee.lastName }}</td>
+        <td class="border px-4 py-2">{{ employee.email }}</td>
+        <td class="border px-4 py-2">{{ employee.birthDate }}</td>
+        <td class="border px-4 py-2">{{ employee.basicSalary }}</td>
+        <td class="border px-4 py-2">{{ employee.status }}</td>
+        <td class="border px-4 py-2">{{ employee.group }}</td>
+        <td class="border px-4 py-2">{{ employee.description }}</td>
+        <td class="border px-4 py-2 space-y-2">
+          <button class="w-full hover:bg-transparent hover:text-amber-300 border hover:border-amber-300 border-amber-300 bg-amber-300 text-white px-2 py-1 rounded duration-150 mr-2" (click)="editEmployee(employee)">
+            Edit
+          </button>
+          <button class="w-full hover:bg-transparent border hover:text-red-500 hover:border-red-500 border-red-500 bg-red-500 text-white px-2 py-1 rounded duration-150"  (click)="deleteEmployee(employee)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="flex justify-center mt-4">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+      Previous
+    </button>
+    <span class="page-info mx-4 text-lg">{{ currentPage }}</span>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" [disabled]="currentPage * itemsPerPage >= employees.length" (click)="changePage(currentPage + 1)">
+      Next
+    </button>
+  </div>
+</div>
